@@ -1,9 +1,6 @@
-runtime: java
-env:
-  JDK_VERSION: 22
-
 services:
   - type: web
-    name: APIrepository
+    name: APIproduct
     env: docker
-    dockerfilePath: Dockerfile
+    repo: https://github.com/PACKAPI/APIPROD.git
+    branch: main
