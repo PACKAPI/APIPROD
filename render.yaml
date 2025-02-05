@@ -1,0 +1,9 @@
+runtime: java
+env:
+  JDK_VERSION: 22
+
+services:
+  - type: web
+    name: APIrepository
+    env: docker
+    dockerfilePath: Dockerfile
