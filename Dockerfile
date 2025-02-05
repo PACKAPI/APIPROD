@@ -1,5 +1,5 @@
 # Usa uma imagem do OpenJDK
-FROM openjdk:22.0.2-jdk-slim
+FROM bellsoft/liberica-openjdk-debian:22
 
 # Define o diretório de trabalho
 WORKDIR /app
