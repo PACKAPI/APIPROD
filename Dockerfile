@@ -1,14 +1,17 @@
-# Usa uma imagem do OpenJDK
-FROM bellsoft/liberica-openjdk-debian:22
+# Use uma imagem oficial do OpenJDK como base
+FROM ubuntu:latest AS build
 
-# Define o diretório de trabalho
-WORKDIR /app
+RUN apt-get update
+RUN apt-get install openjdk-21-jdk -y
 
-# Copia o arquivo JAR gerado pelo Maven ou Gradle
-COPY target/APIproduct-0.0.1-SNAPSHOT.jar app.jar
+COPY . .
 
-# Expõe a porta 8080 (ou a que seu app usa)
+RUN apt-get install maven -y
+RUN mvn clean install
+
+FROM openjdk:22-jdk-slim
+
 EXPOSE 8080
 
-# Comando para rodar a aplicação
-CMD ["java", "-jar", "app.jar"]
+COPY --from=build /target/gamecard-0.0.1-SNAPSHOT.jar app.jar
+ENTRYPOINT [ "java", "-jar", "app.jar" ]
