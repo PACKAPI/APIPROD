@@ -1,28 +1,27 @@
-package com.study.APIproduct.controllers;
-
+package com.study.APIproduct.service;
 
 import com.study.APIproduct.domain.product.Product;
 import com.study.APIproduct.domain.product.ProductRepository;
-import jakarta.validation.Valid;
+import com.study.APIproduct.domain.product.RequestProduct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import com.study.APIproduct.domain.product.RequestProduct;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
-@RestController
-@RequestMapping("/product")
-public class ProductController {
+@Service
+public class ProductService {
+
     @Autowired
     private ProductRepository repository;
-    @GetMapping
-    public ResponseEntity getAllProducts() {
-        var allProducts = repository.findAll();
-        return  ResponseEntity.ok(allProducts);
+
+    public ResponseEntity<List<Product>> getAllProducts() {
+        List<Product> allProducts = repository.findAll();
+        return ResponseEntity.ok(allProducts);
     }
-    @GetMapping("/{id}")
-    public ResponseEntity getProductById(@PathVariable String id) {
+
+    public ResponseEntity<Product> getProductById(String id) {
         Optional<Product> optionalProduct = repository.findById(id);
         if (optionalProduct.isPresent()){
             return ResponseEntity.ok(optionalProduct.get());
@@ -30,14 +29,14 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
-    @PostMapping
-    public ResponseEntity createProduct(@RequestBody @Valid RequestProduct data) {
+
+    public ResponseEntity<Product> insertProduct(RequestProduct data) {
         Product product = new Product(data);
         repository.save(product);
         return ResponseEntity.ok().build();
     }
-    @PutMapping
-    public ResponseEntity updateProduct(@RequestBody @Valid RequestProduct data) {
+
+    public ResponseEntity<Product> updateProduct(RequestProduct data) {
         Optional<Product> optionalProduct = repository.findById(data.id());
         if (optionalProduct.isPresent()){
             Product product = optionalProduct.get();
@@ -49,8 +48,8 @@ public class ProductController {
             return ResponseEntity.notFound().build();
         }
     }
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteProduct(@PathVariable String id) {
+
+    public ResponseEntity<Product> deleteProduct(String id) {
         Optional<Product> optionalProduct = repository.findById(id);
         if (optionalProduct.isPresent()){
             repository.deleteById(id);
@@ -60,5 +59,3 @@ public class ProductController {
         }
     }
 }
-
-
