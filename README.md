@@ -1,4 +1,4 @@
-# API de Produtos VLJ- Spring Boot
+# API de Produtos VLJ - Spring Boot
 
 ## Descrição
 Esta é uma API CRUD para gerenciamento de produtos da VLJ-CARNES, desenvolvida em Spring Boot. Ela permite criar, ler, atualizar e excluir produtos do sistema.
