@@ -2,8 +2,8 @@ package com.study.APIproduct.service;
 
 import com.study.APIproduct.domain.product.Product;
 import com.study.APIproduct.domain.product.ProductRepository;
-import com.study.APIproduct.domain.product.RequestProduct;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -13,48 +13,31 @@ import java.util.Optional;
 @Service
 public class ProductService {
 
+    private final ProductRepository productRepository;
+
     @Autowired
-    private ProductRepository repository;
-
-    public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> allProducts = repository.findAll();
-        return ResponseEntity.ok(allProducts);
+    public ProductService(ProductRepository productRepository) {
+        this.productRepository = productRepository;
     }
 
-    public ResponseEntity<Product> getProductById(String id) {
-        Optional<Product> optionalProduct = repository.findById(id);
-        if (optionalProduct.isPresent()){
-            return ResponseEntity.ok(optionalProduct.get());
-        }else {
-            return ResponseEntity.notFound().build();
-        }
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 
-    public ResponseEntity<Product> insertProduct(RequestProduct data) {
-        Product product = new Product(data);
-        repository.save(product);
-        return ResponseEntity.ok().build();
+    public Optional<Product> getProductById(String id) {
+        return productRepository.findById(id);
     }
 
-    public ResponseEntity<Product> updateProduct(RequestProduct data) {
-        Optional<Product> optionalProduct = repository.findById(data.id());
-        if (optionalProduct.isPresent()){
-            Product product = optionalProduct.get();
-            product.setName(data.name());
-            product.setPrice_in_cents(data.price_in_cents());
-            repository.save(product);
-            return ResponseEntity.ok(product);
-        }else {
-            return ResponseEntity.notFound().build();
-        }
+    public Product insertProduct(Product product) {
+        return productRepository.save(product);
     }
 
-    public ResponseEntity<Product> deleteProduct(String id) {
-        Optional<Product> optionalProduct = repository.findById(id);
-        if (optionalProduct.isPresent()){
-            repository.deleteById(id);
+    public ResponseEntity<Void> deleteProduct(String id) {
+        Optional<Product> optionalProduct = productRepository.findById(id);
+        if (optionalProduct.isPresent()) {
+            productRepository.deleteById(id);
             return ResponseEntity.ok().build();
-        }else {
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
