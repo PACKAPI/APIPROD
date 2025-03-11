@@ -15,13 +15,14 @@ public class Product {
     private int price_in_cents;
     private String description;
     private String url_image;
-    private int id_category;
+    @Column(name = "id_category")
+    private int category;
     public Product(RequestProduct requestProduct) {
         this.name = requestProduct.name();
         this.price_in_cents = requestProduct.price_in_cents();
         this.description = requestProduct.description();
         this.url_image = requestProduct.image_url();
-        this.id_category = requestProduct.id_category();
+        this.category = requestProduct.category();
     }
     public Product() {
     }
@@ -66,10 +67,11 @@ public class Product {
         this.url_image = image_url;
     }
 
-    public int getId_category() {
-        return id_category;
+    public int get_category() {
+        return category;
     }
 
-    public void setId_category(int id_category) {
+    public void set_category(int id_category) {
+        this.category = id_category;
     }
 }

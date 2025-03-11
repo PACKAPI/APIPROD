@@ -2,6 +2,8 @@ package com.study.APIproduct.domain.product;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProductRepository extends JpaRepository<Product, String> {
+import java.util.Optional;
 
+public interface ProductRepository extends JpaRepository<Product, String> {
+    Optional<Product> findByCategory(int id_category);
 }

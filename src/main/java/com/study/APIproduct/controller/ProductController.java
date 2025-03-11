@@ -26,6 +26,10 @@ public class ProductController {
     public ResponseEntity<Product> getProductById(@PathVariable String id) {
         return productService.getProductById(id);
     }
+    @GetMapping("/get/category/{id}")
+    public ResponseEntity<Product> getProductByCategoryId(@PathVariable String id) {
+        return productService.getProductByCategoryId(id);
+    }
 
     @PostMapping("/insert")
     public ResponseEntity<Product> insertProduct(@RequestBody @Valid RequestProduct data) {

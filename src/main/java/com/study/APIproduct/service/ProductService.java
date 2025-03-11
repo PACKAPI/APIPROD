@@ -29,6 +29,14 @@ public class ProductService {
             return ResponseEntity.notFound().build();
         }
     }
+    public ResponseEntity<Product> getProductByCategoryId(String idCategory) {
+        Optional<Product> optionalProduct = repository.findByCategory(Integer.parseInt(idCategory));
+        if (optionalProduct.isPresent()){
+            return ResponseEntity.ok(optionalProduct.get());
+        }else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
     public ResponseEntity<Product> insertProduct(RequestProduct data) {
         Product product = new Product(data);
