@@ -25,17 +25,16 @@ public class ProductService {
         Optional<Product> optionalProduct = repository.findById(id);
         if (optionalProduct.isPresent()){
             return ResponseEntity.ok(optionalProduct.get());
-        }else {
-            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.notFound().build();
     }
     public ResponseEntity<Product> getProductByCategoryId(String idCategory) {
         Optional<Product> optionalProduct = repository.findByCategory(Integer.parseInt(idCategory));
         if (optionalProduct.isPresent()){
             return ResponseEntity.ok(optionalProduct.get());
-        }else {
-            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.notFound().build();
+
     }
 
     public ResponseEntity<Product> insertProduct(RequestProduct data) {
@@ -52,9 +51,8 @@ public class ProductService {
             product.setPrice_in_cents(data.price_in_cents());
             repository.save(product);
             return ResponseEntity.ok(product);
-        }else {
-            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.notFound().build();
     }
 
     public ResponseEntity<Product> deleteProduct(String id) {
@@ -62,8 +60,7 @@ public class ProductService {
         if (optionalProduct.isPresent()){
             repository.deleteById(id);
             return ResponseEntity.ok().build();
-        }else {
-            return ResponseEntity.notFound().build();
         }
+        return ResponseEntity.notFound().build();
     }
 }

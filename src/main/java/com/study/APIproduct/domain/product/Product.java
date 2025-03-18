@@ -3,7 +3,6 @@ package com.study.APIproduct.domain.product;
 import jakarta.persistence.*;
 import lombok.*;
 
-
 @Table(name = "product")
 @Entity
 @EqualsAndHashCode(of = "id")

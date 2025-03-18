@@ -7,3 +7,10 @@ CREATE TABLE product
     image_url      TEXT                    NOT NULL,
     id_category    INT                    NOT NULL,
 );
+CREATE TABLE customer(
+                        id SERIAL PRIMARY KEY ,
+                        name VARCHAR(50) NOT NULL,
+                        email VARCHAR(100) NOT NULL,
+                        password VARCHAR(100) NOT NULL,
+                        address VARCHAR(200)
+)
