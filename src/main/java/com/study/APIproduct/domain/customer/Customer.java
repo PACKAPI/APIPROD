@@ -1,13 +1,15 @@
 package com.study.APIproduct.domain.customer;
 
 import jakarta.persistence.*;
+import lombok.EqualsAndHashCode;
 
 @Table(name= "customer")
 @Entity
+@EqualsAndHashCode(of = "id")
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
     private String name;
     private String email;
     private String password;
@@ -21,11 +23,11 @@ public class Customer {
     }
     public Customer() {}
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
