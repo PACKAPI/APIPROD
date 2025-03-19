@@ -5,12 +5,16 @@ import com.study.APIproduct.domain.customer.CustomerRepository;
 import com.study.APIproduct.domain.customer.RequestCustomer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
+@Service
 public class CustomerService {
+
     @Autowired
     private CustomerRepository repository;
+
     public ResponseEntity<Customer> insertCustomer(RequestCustomer data) {
         Customer customer = new Customer(data);
         repository.save(customer);
