@@ -15,13 +15,14 @@ public class Customer {
     private String password;
     private String address;
     public Customer(RequestCustomer requestCustomer) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.password = password;
-        this.address = address;
+        this.name = requestCustomer.name();
+        this.email = requestCustomer.email();
+        this.password = requestCustomer.password();
+        this.address = requestCustomer.address();
     }
-    public Customer() {}
+    public Customer() {
+
+    }
 
     public String getId() {
         return id;
