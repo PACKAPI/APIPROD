@@ -1,6 +1,5 @@
 package com.study.APIproduct.domain.customer;
 
-import com.study.APIproduct.domain.customer.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
