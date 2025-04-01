@@ -28,8 +28,9 @@ public class ProductController {
     public ResponseEntity<Product> getProductById(@PathVariable String id) {
         return productService.getProductById(id);
     }
+
     @GetMapping("/get/category/{id}")
-    public ResponseEntity<Product> getProductByCategoryId(@PathVariable String id) {
+    public List<Product> getProductByCategoryId(@PathVariable String id) {
         return productService.getProductByCategoryId(id);
     }
 

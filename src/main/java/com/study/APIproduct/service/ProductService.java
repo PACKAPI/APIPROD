@@ -28,13 +28,12 @@ public class ProductService {
         }
         return ResponseEntity.notFound().build();
     }
-    public ResponseEntity<Product> getProductByCategoryId(String idCategory) {
-        Optional<Product> optionalProduct = repository.findByCategory(Integer.parseInt(idCategory));
-        if (optionalProduct.isPresent()){
-            return ResponseEntity.ok(optionalProduct.get());
+    public List<Product> getProductByCategoryId(String idCategory) {
+        List<Product> optionalProduct = repository.findByCategory(Integer.parseInt(idCategory));
+        if (!optionalProduct.isEmpty()){
+            return optionalProduct;
         }
-        return ResponseEntity.notFound().build();
-
+        return optionalProduct;
     }
 
     public ResponseEntity<Product> insertProduct(RequestProduct data) {
