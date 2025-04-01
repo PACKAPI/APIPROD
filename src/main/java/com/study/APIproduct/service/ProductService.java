@@ -29,11 +29,11 @@ public class ProductService {
         return ResponseEntity.notFound().build();
     }
     public List<Product> getProductByCategoryId(String idCategory) {
-        List<Product> optionalProduct = repository.findByCategory(Integer.parseInt(idCategory));
-        if (!optionalProduct.isEmpty()){
-            return optionalProduct;
+        List<Product> listProduct = repository.findByCategory(Integer.parseInt(idCategory));
+        if (!listProduct.isEmpty()){
+            return listProduct;
         }
-        return optionalProduct;
+        return listProduct;
     }
 
     public ResponseEntity<Product> insertProduct(RequestProduct data) {
