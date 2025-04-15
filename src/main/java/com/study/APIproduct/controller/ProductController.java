@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 // Tem que alterar a url depois de subir o front
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "https://vlj-front.onrender.com/")
 @RestController
 @RequestMapping("/product")
 public class ProductController {
